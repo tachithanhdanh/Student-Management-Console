@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Annotation profile for StudentManagementConsole" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <option name="project" value="com.example/StudentManagementConsole" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/info/picocli/picocli-codegen/4.6.1/picocli-codegen-4.6.1.jar" />
+          <entry name="$MAVEN_REPOSITORY$/info/picocli/picocli/4.6.1/picocli-4.6.1.jar" />
+        </processorPath>
+        <module name="StudentManagementConsole" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="StudentManagementConsole" options="-Aproject=com.example/StudentManagementConsole" />
+    </option>
+  </component>
+</project>
