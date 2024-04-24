@@ -14,7 +14,7 @@ public class StudentView {
     }
 
     public void showMenu() {
-        System.out.println("Student Management System Console Application");
+        System.out.println();
         System.out.println("#1. Add student");
         System.out.println("#2. Update student information");
         System.out.println("#3. Find student by id");
@@ -28,17 +28,26 @@ public class StudentView {
 
     public int getInput(String prompt) {
         System.out.print(prompt);
-        return scanner.nextInt();
+        int input = scanner.nextInt();
+        scanner.nextLine();
+        return input;
+    }
+
+    public String getFilePath(String prompt) {
+        System.out.print(prompt);
+        return scanner.nextLine();
+    }
+
+    public void pause() {
+        showMessage("Press enter to continue...");
+        scanner.nextLine();
     }
 
     public int getStudentId() {
         return getInput("Enter student id: ");
     }
 
-    public Student getStudentInput() {
-        scanner.nextLine();
-        int id = getStudentId();
-        scanner.nextLine();
+    public Student getStudentInput(int id) {
         System.out.print("Enter student name: ");
         String name = scanner.nextLine();
         System.out.print("Enter student score: ");
@@ -64,7 +73,7 @@ public class StudentView {
     public void showStudentList(List<Student> studentList) {
         for (int i = 0; i < studentList.size(); ++i) {
             showMessage("Student No." + Integer.toString(i + 1));
-            showStudentDetails(studentList.get(i));;
+            showStudentDetails(studentList.get(i));
         }
     }
 

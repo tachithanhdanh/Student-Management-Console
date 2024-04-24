@@ -1,5 +1,7 @@
 package com.studentmanagement.Controller;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import com.studentmanagement.Data.StudentDao;
@@ -17,6 +19,7 @@ public class StudentController {
     }
 
     public void run() {
+        studentView.showMessage("Student Management System Console Application");
         boolean running = true;
         while (running) {
             studentView.showMenu();
@@ -33,11 +36,17 @@ public class StudentController {
                 case 9 -> running = false;
                 default -> studentView.showMessage("Invalid choice");
             }
+            studentView.pause();
         }
     }
 
     private void addStudent() {
-        Student student = studentView.getStudentInput();
+        int id = studentView.getStudentId();
+        if (studentDao.getStudentById(id) != null) {
+            studentView.showMessage("Student with id = " + id + " is already in the database");
+            return;
+        }
+        Student student = studentView.getStudentInput(id);
         studentDao.addStudent(student);
         studentView.showMessage("Student added sucessfully");
     }
@@ -45,7 +54,7 @@ public class StudentController {
     private void updateStudent() {
         int id = studentView.getStudentId();
         if (studentDao.getStudentById(id) != null) {
-            Student newStudent = studentView.getStudentInput();
+            Student newStudent = studentView.getStudentInput(id);
             studentDao.updateStudent(id, newStudent);
             studentView.showMessage("Student updated successfully");
         } else {
@@ -99,13 +108,55 @@ public class StudentController {
         try {
             studentView.showFileOptions();
             int choice = studentView.getInput("Your choice: ");
-            
-        } finally {
-            return;
+            switch (choice) {
+                case 1 -> importStudentListFromFile();
+                case 2 -> importStudentListFromCsv();
+                default -> throw new Exception("Invalid choice");
+            }
+            studentView.showMessage("Data imported successfully");
+        } catch (FileNotFoundException e) {
+            studentView.showMessage("Error: File does not exist or cannot be opened!");
+        } catch (Exception e) {
+            studentView.showMessage("#####ERROR#####");
+            studentView.showMessage(e.getMessage());
         }
     }
 
-    private void exportStudentList() {
+    private void importStudentListFromFile() throws IOException, FileNotFoundException, ClassNotFoundException {
+        String path = studentView.getFilePath("Enter the file path of binary file: ");
+        studentDao.importDataFromBinaryFile(path);
+    }
 
+    private void importStudentListFromCsv() throws IOException, FileNotFoundException, ClassNotFoundException {
+        String path = studentView.getFilePath("Enter the file path of csv file: ");
+        studentDao.importDataFromCsv(path);
+    }
+
+    private void exportStudentList() {
+        try {
+            studentView.showFileOptions();
+            int choice = studentView.getInput("Enter your choice: ");
+            switch (choice) {
+                case 1 -> exportStudentListToFile();
+                case 2 -> exportStudentListToCsv();
+                default -> throw new IOException("Invalid choice");
+            }
+            studentView.showMessage("Data exported to file successfully");
+        } catch (FileNotFoundException e) {
+            studentView.showMessage("Error: File cannot be created or opened!");
+        } catch (IOException e) {
+            studentView.showMessage("Error: Cannot complete the process!");
+            studentView.showMessage(e.getMessage());
+        }
+    }
+
+    private void exportStudentListToFile() throws IOException, FileNotFoundException {
+        String path = studentView.getFilePath("Enter the file path of binary file: ");
+        studentDao.exportDataToBinaryFile(path);
+    }
+
+    private void exportStudentListToCsv() throws IOException, FileNotFoundException {
+        String path = studentView.getFilePath("Enter the file path of csv file: ");
+        studentDao.exportDataToCsv(path);
     }
 }

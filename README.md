@@ -1,1 +1,1 @@
-# com.studentmanagement/demo
+# com.studentmanagement

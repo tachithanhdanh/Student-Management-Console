@@ -48,7 +48,7 @@ public class StudentFileManager {
                 studentTemp.setId(Integer.parseInt(attributes[Constants.ID_POS]));
                 studentTemp.setName(attributes[Constants.NAME_POS]);
                 studentTemp.setScore(Float.parseFloat(attributes[Constants.SCORE_POS]));
-                studentTemp.setImage(attributes[Constants.ADDRESS_POS]);
+                studentTemp.setImage(attributes[Constants.IMAGE_POS]);
                 studentTemp.setAddress(attributes[Constants.ADDRESS_POS]);
                 studentTemp.setDescription(attributes[Constants.DESCRIPTION_POS]);
                 studentList.add(studentTemp);
