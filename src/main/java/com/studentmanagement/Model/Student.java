@@ -1,8 +1,10 @@
 package com.studentmanagement.Model;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class Student implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private int id;
@@ -65,26 +67,24 @@ public class Student implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("\tStudent ID          : ");
-        sb.append(id);
-        sb.append("\n");
-        sb.append("\tStudent Name        : ");
-        sb.append(name);
-        sb.append("\n");
-        sb.append("\tStudent Score       : ");
-        sb.append(score);
-        sb.append("\n");
-        sb.append("\tStudent Image       : ");
-        sb.append(image);
-        sb.append("\n");
-        sb.append("\tStudent Address     : ");
-        sb.append(address);
-        sb.append("\n");
-        sb.append("\tStudent Description : ");
-        sb.append(description);
-        sb.append("\n");
-        return sb.toString();
+        return "\tStudent ID          : " +
+                id +
+                "\n" +
+                "\tStudent Name        : " +
+                name +
+                "\n" +
+                "\tStudent Score       : " +
+                score +
+                "\n" +
+                "\tStudent Image       : " +
+                image +
+                "\n" +
+                "\tStudent Address     : " +
+                address +
+                "\n" +
+                "\tStudent Description : " +
+                description +
+                "\n";
     }
 
     public String toCsvString() {
